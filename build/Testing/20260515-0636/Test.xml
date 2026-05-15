@@ -19,32 +19,26 @@
 	ProcessorCacheSize="0"
 	NumberOfLogicalCPU="4"
 	NumberOfPhysicalCPU="4"
-	TotalVirtualMemory="14482"
+	TotalVirtualMemory="15523"
 	TotalPhysicalMemory="8130"
 	LogicalProcessorsPerPhysical="1"
 	ProcessorClockFrequency="3401.000000"
 	>
 	<Testing>
-		<StartDateTime>May 15 17:04 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</StartDateTime>
-		<StartTestTime>1778832281</StartTestTime>
+		<StartDateTime>May 15 17:18 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</StartDateTime>
+		<StartTestTime>1778833112</StartTestTime>
 		<TestList>
-			<Test>./ControllerTest.NextFavorite_Normal</Test>
+			<Test>./ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"</Test>
 		</TestList>
-		<Test Status="failed">
-			<Name>ControllerTest.NextFavorite_Normal</Name>
+		<Test Status="passed">
+			<Name>ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"</Name>
 			<Path>.</Path>
-			<FullName>./ControllerTest.NextFavorite_Normal</FullName>
-			<FullCommandLine>E:\dev\TDD_TV_13\build\TVChannelControllerTest.exe "--gtest_filter=ControllerTest.NextFavorite_Normal" "--gtest_also_run_disabled_tests"</FullCommandLine>
-			<StartTestTime>1778832281.960818</StartTestTime>
+			<FullName>./ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"</FullName>
+			<FullCommandLine>E:\dev\TDD_TV_13\build\TunerTest.exe "--gtest_filter=ValidChannels/TunerValidChannelTest.testSetChForValidChannel/4" "--gtest_also_run_disabled_tests"</FullCommandLine>
+			<StartTestTime>1778833112.907014</StartTestTime>
 			<Results>
-				<NamedMeasurement type="text/string" name="Exit Code">
-					<Value>Failed</Value>
-				</NamedMeasurement>
-				<NamedMeasurement type="text/string" name="Exit Value">
-					<Value>1</Value>
-				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Execution Time">
-					<Value>0.037536</Value>
+					<Value>0.036619</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Processors">
 					<Value>1</Value>
@@ -53,18 +47,18 @@
 					<Value>Completed</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="text/string" name="Command Line">
-					<Value>E:\dev\TDD_TV_13\build\TVChannelControllerTest.exe "--gtest_filter=ControllerTest.NextFavorite_Normal" "--gtest_also_run_disabled_tests"</Value>
+					<Value>E:\dev\TDD_TV_13\build\TunerTest.exe "--gtest_filter=ValidChannels/TunerValidChannelTest.testSetChForValidChannel/4" "--gtest_also_run_disabled_tests"</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="text/string" name="Environment">
 					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
 				</NamedMeasurement>
 				<Measurement>
-					<Value encoding="base64" compression="gzip">eJyVUdtqwkAQfd+vGHxSaEJtobQBC+KthSJFU/tgJKzJqAub3XR3Vu3fNxcRtRTsvOztzNlzzkycUkKtIeNCNVuwMjqDQRCluI3Cfj8OZ3H7Plo6IdMoTjG30VrrtURCS541yckxqo7lLi7J/CRhY00YwKiCQFi8wEpIQgMd6GlFRkuJprz3x7inId9qIwjjsTYZl2zeOdYCJgedbaCKp9R52FtXNPls7h1rASOpl1zW76i2wmiVoSqwSJ7LL8CnnOe62BwmH2OoanGN5l/RVcmEs96GK4XygiHJ8+DpMYAhF9IZZIN9jglhCvjluBT0DXoFtEGLsOXSoQ0YQKN91ygWcgqN97xG6jljCm+9l2aLlUI/NyLZgLABNB4arLAAw+7r26B/nQVotiGzrWsTquFAmrhsseuGQMiNl+qdOh/xX6MFw5V//k/h6b07ndaebius9c+d1gw3IIUtE12i1Lvgv2EwVvAcGsLBNGQ/Y/QK8g==</Value>
+					<Value encoding="base64" compression="gzip">eJylUcFqg0AQvfsVc4wHTUJ7CuRQYppDIS1qc8mKbHRiFtbZsLumv19XQ9BCIeA7zex7vNk3EzdEgiqouaCZD2etatiuWIk3lkZRnh7y5Qs7NUKWLC/xalilVCXRorGB0cWgZV3rqtyZhUXh7ZXFFew6CaQtA2chLWpYw4FLUW4unAilmacNoR4+OXHovBK0m8u7GpHzV++4fiCD+J5hCbab4TLca9MIi6F3DB7IYCfVicueR7oJrahGarVog+b6Rzz0fOLP3hHi7z10yCaH7H3g82OyF8wWUBt/UrbeA6yyXPreczu1yHVQqh8aX+y/S4HmFI7ntEv4ekuSbeQW2mtD7xfPlOkL====</Value>
 				</Measurement>
 			</Results>
 		</Test>
-		<EndDateTime>May 15 17:04 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</EndDateTime>
-		<EndTestTime>1778832282</EndTestTime>
+		<EndDateTime>May 15 17:18 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</EndDateTime>
+		<EndTestTime>1778833112</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

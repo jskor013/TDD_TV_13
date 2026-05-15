@@ -34,6 +34,8 @@ public:
 
     void pushButton(remoteKey key) {
         std::string tmp;
+        int curCH;
+        std::set<int>::iterator it;
         switch (key) {
             case remoteKey::KEY_1:
             case remoteKey::KEY_2:
@@ -59,12 +61,18 @@ public:
                 processingCH = "";
                 break;
             case remoteKey::KEY_FAVORITE:
-                int curCH = std::stoi(tuner->getCurrentCH());
-                auto it = FavoriteList.find(curCH);
+                curCH = std::stoi(tuner->getCurrentCH());
+                it = FavoriteList.find(curCH);
                 if (it == FavoriteList.end()) 
                     FavoriteList.insert(curCH);                 
                 else 
                     FavoriteList.erase(it);                                               
+                break;
+            case remoteKey::KEY_NEXT_FAVORITE:
+                curCH = std::stoi(tuner->getCurrentCH());
+                it = FavoriteList.upper_bound(curCH);
+                if(it == FavoriteList.end())  it = FavoriteList.begin();
+                tuner->setCH(std::to_string(*it));
                 break;
         }
     }
