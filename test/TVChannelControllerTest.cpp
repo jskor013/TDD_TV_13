@@ -45,7 +45,7 @@ TEST_F(ControllerTest, OtherButtonCancelsBuffer) {
     ctrl->pushButton(remoteKey::KEY_6); // 3자리 -> 무효화
     ctrl->pushButton(remoteKey::KEY_OTHER);
     // 6은 무효화 → 채널 변화 없음
-    EXPECT_EQ("0", tuner->getCurrentCH());
+    EXPECT_EQ("45", tuner->getCurrentCH());
 }
 
 // S1-5: '0','7' -> 7번

@@ -25,20 +25,26 @@
 	ProcessorClockFrequency="3401.000000"
 	>
 	<Testing>
-		<StartDateTime>May 15 16:45 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</StartDateTime>
-		<StartTestTime>1778831143</StartTestTime>
+		<StartDateTime>May 15 17:04 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</StartDateTime>
+		<StartTestTime>1778832281</StartTestTime>
 		<TestList>
-			<Test>./ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"</Test>
+			<Test>./ControllerTest.NextFavorite_Normal</Test>
 		</TestList>
-		<Test Status="passed">
-			<Name>ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"</Name>
+		<Test Status="failed">
+			<Name>ControllerTest.NextFavorite_Normal</Name>
 			<Path>.</Path>
-			<FullName>./ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"</FullName>
-			<FullCommandLine>E:\dev\TDD_TV_13\build\TunerTest.exe "--gtest_filter=ValidChannels/TunerValidChannelTest.testSetChForValidChannel/4" "--gtest_also_run_disabled_tests"</FullCommandLine>
-			<StartTestTime>1778831143.543391</StartTestTime>
+			<FullName>./ControllerTest.NextFavorite_Normal</FullName>
+			<FullCommandLine>E:\dev\TDD_TV_13\build\TVChannelControllerTest.exe "--gtest_filter=ControllerTest.NextFavorite_Normal" "--gtest_also_run_disabled_tests"</FullCommandLine>
+			<StartTestTime>1778832281.960818</StartTestTime>
 			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>Failed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>1</Value>
+				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Execution Time">
-					<Value>0.266551</Value>
+					<Value>0.037536</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Processors">
 					<Value>1</Value>
@@ -47,18 +53,18 @@
 					<Value>Completed</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="text/string" name="Command Line">
-					<Value>E:\dev\TDD_TV_13\build\TunerTest.exe "--gtest_filter=ValidChannels/TunerValidChannelTest.testSetChForValidChannel/4" "--gtest_also_run_disabled_tests"</Value>
+					<Value>E:\dev\TDD_TV_13\build\TVChannelControllerTest.exe "--gtest_filter=ControllerTest.NextFavorite_Normal" "--gtest_also_run_disabled_tests"</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="text/string" name="Environment">
 					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
 				</NamedMeasurement>
 				<Measurement>
-					<Value encoding="base64" compression="gzip">eJylUcGKgzAQvecr5lgPWsoWFgo9LLXtYaG7qNuLEUl1agMxKUns/v4alWILCwXfaSbv8SZvJmqk5LKCmnE58+CsVQ3bFS3xRpMwzJNjvnijp4aLkuYlXg2tlKoEWjTWN7oYtbRrXZU7s6AoyEFZXMG+k0DSMnDmwqKGNRyZ4OXmwqREYeZJI1GPn5w4cF4x2s1lpx7I+ZKk6zsyiIYMC7DdDJdhqE3DLQYk9e/IYC/UiYmeR3njWskaZatF6zfXJ/HY84U/kxSinwN0yCaH7H3g63OyF8yW71Abb1K4wQSsskx45LWtWmTaL9WvfLzZf7cCzWTwNKjdw/dHHG9Dt9NeHJA/cJ7pvA==</Value>
+					<Value encoding="base64" compression="gzip">eJyVUdtqwkAQfd+vGHxSaEJtobQBC+KthSJFU/tgJKzJqAub3XR3Vu3fNxcRtRTsvOztzNlzzkycUkKtIeNCNVuwMjqDQRCluI3Cfj8OZ3H7Plo6IdMoTjG30VrrtURCS541yckxqo7lLi7J/CRhY00YwKiCQFi8wEpIQgMd6GlFRkuJprz3x7inId9qIwjjsTYZl2zeOdYCJgedbaCKp9R52FtXNPls7h1rASOpl1zW76i2wmiVoSqwSJ7LL8CnnOe62BwmH2OoanGN5l/RVcmEs96GK4XygiHJ8+DpMYAhF9IZZIN9jglhCvjluBT0DXoFtEGLsOXSoQ0YQKN91ygWcgqN97xG6jljCm+9l2aLlUI/NyLZgLABNB4arLAAw+7r26B/nQVotiGzrWsTquFAmrhsseuGQMiNl+qdOh/xX6MFw5V//k/h6b07ndaebius9c+d1gw3IIUtE12i1Lvgv2EwVvAcGsLBNGQ/Y/QK8g==</Value>
 				</Measurement>
 			</Results>
 		</Test>
-		<EndDateTime>May 15 16:45 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</EndDateTime>
-		<EndTestTime>1778831143</EndTestTime>
+		<EndDateTime>May 15 17:04 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</EndDateTime>
+		<EndTestTime>1778832282</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

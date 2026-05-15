@@ -1,4 +1,4 @@
-ControllerTest.OtherButtonCancelsBuffer 2 0.032569
+ControllerTest.OtherButtonCancelsBuffer 3 0.0339492
 ControllerTest.Press1234_TwoStageChange 2 0.0908792
 ControllerTest.Press1Then2_AutoChange 2 0.0416575
 ControllerTest.PressNumber1ThenConfirm 2 0.0464765
@@ -17,10 +17,11 @@ ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"12" 3 0.0413441
 ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"4" 3 0.0351254
 ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"5" 3 0.035227
 ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99" 3 0.111084
-ControllerTest.FavoriteAdd_NewChannel 0 0
-ControllerTest.FavoriteToggle_Remove 1 0.0390903
-ControllerTest.FavoriteToggleScenario 0 0
+ControllerTest.FavoriteAdd_NewChannel 1 0.042407
+ControllerTest.FavoriteToggle_Remove 2 0.0428599
+ControllerTest.FavoriteToggleScenario 1 0.053746
 ControllerTest.NextFavorite_EmptyList 1 0.0535349
 ControllerTest.NextFavorite_Normal 0 0
 ControllerTest.NextFavorite_WrapAround 0 0
 ---
+ControllerTest.NextFavorite_Normal

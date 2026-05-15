@@ -58,6 +58,14 @@ public:
             case remoteKey::KEY_OTHER:
                 processingCH = "";
                 break;
+            case remoteKey::KEY_FAVORITE:
+                int curCH = std::stoi(tuner->getCurrentCH());
+                auto it = FavoriteList.find(curCH);
+                if (it == FavoriteList.end()) 
+                    FavoriteList.insert(curCH);                 
+                else 
+                    FavoriteList.erase(it);                                               
+                break;
         }
     }
     void addFavorite(int ch)
