@@ -66,3 +66,4 @@ Test Dev To-Do List
 4. 선호 채널 리스트 관리 RED CASE 추가
 5. 선호 채널 추가 버튼 구현 후 선호채널 TEST 진행 완료
 6. 다음 선호 채널 기능 추가 완료 - Empty Case RED로 남아있음.
+7. 다음 선호 채널 기능 구현 완료 - Empty Case Pass

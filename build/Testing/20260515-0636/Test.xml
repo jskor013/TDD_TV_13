@@ -19,14 +19,14 @@
 	ProcessorCacheSize="0"
 	NumberOfLogicalCPU="4"
 	NumberOfPhysicalCPU="4"
-	TotalVirtualMemory="15523"
+	TotalVirtualMemory="15162"
 	TotalPhysicalMemory="8130"
 	LogicalProcessorsPerPhysical="1"
 	ProcessorClockFrequency="3401.000000"
 	>
 	<Testing>
-		<StartDateTime>May 15 17:18 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</StartDateTime>
-		<StartTestTime>1778833112</StartTestTime>
+		<StartDateTime>May 15 17:24 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</StartDateTime>
+		<StartTestTime>1778833449</StartTestTime>
 		<TestList>
 			<Test>./ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"</Test>
 		</TestList>
@@ -35,10 +35,10 @@
 			<Path>.</Path>
 			<FullName>./ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"</FullName>
 			<FullCommandLine>E:\dev\TDD_TV_13\build\TunerTest.exe "--gtest_filter=ValidChannels/TunerValidChannelTest.testSetChForValidChannel/4" "--gtest_also_run_disabled_tests"</FullCommandLine>
-			<StartTestTime>1778833112.907014</StartTestTime>
+			<StartTestTime>1778833449.182132</StartTestTime>
 			<Results>
 				<NamedMeasurement type="numeric/double" name="Execution Time">
-					<Value>0.036619</Value>
+					<Value>0.029860</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Processors">
 					<Value>1</Value>
@@ -57,8 +57,8 @@
 				</Measurement>
 			</Results>
 		</Test>
-		<EndDateTime>May 15 17:18 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</EndDateTime>
-		<EndTestTime>1778833112</EndTestTime>
+		<EndDateTime>May 15 17:24 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</EndDateTime>
+		<EndTestTime>1778833449</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

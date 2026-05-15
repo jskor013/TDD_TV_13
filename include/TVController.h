@@ -69,6 +69,7 @@ public:
                     FavoriteList.erase(it);                                               
                 break;
             case remoteKey::KEY_NEXT_FAVORITE:
+                if(FavoriteList.empty()) break;
                 curCH = std::stoi(tuner->getCurrentCH());
                 it = FavoriteList.upper_bound(curCH);
                 if(it == FavoriteList.end())  it = FavoriteList.begin();
