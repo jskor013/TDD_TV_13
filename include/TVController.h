@@ -31,12 +31,30 @@ public:
     explicit TVController(Tuner* tuner) : tuner(tuner), processingCH("") {}
 
     void pushButton(remoteKey key) {
+        std::string tmp;
         switch (key) {
             case remoteKey::KEY_1:
+            case remoteKey::KEY_2:
+            case remoteKey::KEY_3:
+            case remoteKey::KEY_4:
+            case remoteKey::KEY_5:
+            case remoteKey::KEY_6:
+            case remoteKey::KEY_7:
+            case remoteKey::KEY_8:
+            case remoteKey::KEY_9:
+            case remoteKey::KEY_0:                  
                 processingCH += to_string(key);
-                break;
+                if(processingCH.size()==2) 
+                {
+                    tuner->setCH(processingCH);
+                    processingCH = "";
+                }
+                break;            
             case remoteKey::KEY_OK:
-                setTunerCh();
+                tuner->setCH(processingCH);
+                break;
+            case remoteKey::KEY_OTHER:
+                processingCH = "";
                 break;
         }
     }

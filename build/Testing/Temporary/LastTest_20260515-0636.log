@@ -1,30 +1,30 @@
-Start testing: May 15 16:02 대한민국 표준시
+Start testing: May 15 16:27 대한민국 표준시
 ----------------------------------------------------------
-8/19 Testing: ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"
-8/19 Test: ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"
-Command: "E:/dev/TDD_TV_13/build/TunerTest.exe" "--gtest_filter=ValidChannels/TunerValidChannelTest.testSetChForValidChannel/4" "--gtest_also_run_disabled_tests"
+19/19 Testing: ControllerTest.Zero7_SingleDigit7
+19/19 Test: ControllerTest.Zero7_SingleDigit7
+Command: "E:/dev/TDD_TV_13/build/TVChannelControllerTest.exe" "--gtest_filter=ControllerTest.Zero7_SingleDigit7" "--gtest_also_run_disabled_tests"
 Directory: E:/dev/TDD_TV_13/build
-"ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"" start time: May 15 16:02 대한민국 표준시
+"ControllerTest.Zero7_SingleDigit7" start time: May 15 16:27 대한민국 표준시
 Output:
 ----------------------------------------------------------
 Running main() from E:\dev\TDD_TV_13\build\_deps\googletest-src\googletest\src\gtest_main.cc
-Note: Google Test filter = ValidChannels/TunerValidChannelTest.testSetChForValidChannel/4
+Note: Google Test filter = ControllerTest.Zero7_SingleDigit7
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
-[----------] 1 test from ValidChannels/TunerValidChannelTest
-[ RUN      ] ValidChannels/TunerValidChannelTest.testSetChForValidChannel/4
-[       OK ] ValidChannels/TunerValidChannelTest.testSetChForValidChannel/4 (0 ms)
-[----------] 1 test from ValidChannels/TunerValidChannelTest (0 ms total)
+[----------] 1 test from ControllerTest
+[ RUN      ] ControllerTest.Zero7_SingleDigit7
+[       OK ] ControllerTest.Zero7_SingleDigit7 (0 ms)
+[----------] 1 test from ControllerTest (0 ms total)
 
 [----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.03 sec
+Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"" end time: May 15 16:02 대한민국 표준시
-"ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"" time elapsed: 00:00:00
+"ControllerTest.Zero7_SingleDigit7" end time: May 15 16:27 대한민국 표준시
+"ControllerTest.Zero7_SingleDigit7" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: May 15 16:02 대한민국 표준시
+End testing: May 15 16:27 대한민국 표준시
