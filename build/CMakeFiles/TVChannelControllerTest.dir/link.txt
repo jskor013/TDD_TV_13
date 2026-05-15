@@ -1,0 +1,3 @@
+C:\mingw64\bin\cmake.exe -E rm -f CMakeFiles\TVChannelControllerTest.dir/objects.a
+C:\mingw64\bin\ar.exe qc CMakeFiles\TVChannelControllerTest.dir/objects.a @CMakeFiles\TVChannelControllerTest.dir\objects1.rsp
+C:\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\TVChannelControllerTest.dir/objects.a -Wl,--no-whole-archive -o TVChannelControllerTest.exe -Wl,--out-implib,libTVChannelControllerTest.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\TVChannelControllerTest.dir\linkLibs.rsp

@@ -1,0 +1,17 @@
+{
+  "tests": 1,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "TVControllerTest",
+      "tests": 1,
+      "testsuite": [
+        {
+          "name": "testFramework",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVControllerTest.cpp",
+          "line": 13
+        }
+      ]
+    }
+  ]
+}

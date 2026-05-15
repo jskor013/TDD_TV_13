@@ -1,0 +1,99 @@
+{
+  "tests": 13,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "TunerTest",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "initChannel",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 20
+        },
+        {
+          "name": "testSeekCh10times",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 60
+        },
+        {
+          "name": "testSeekCh10timesAfterSetCH",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "name": "ValidChannels\/TunerValidChannelTest",
+      "tests": 5,
+      "testsuite": [
+        {
+          "name": "testSetChForValidChannel\/0",
+          "value_param": "\"0\"",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 32
+        },
+        {
+          "name": "testSetChForValidChannel\/1",
+          "value_param": "\"4\"",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 32
+        },
+        {
+          "name": "testSetChForValidChannel\/2",
+          "value_param": "\"5\"",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 32
+        },
+        {
+          "name": "testSetChForValidChannel\/3",
+          "value_param": "\"12\"",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 32
+        },
+        {
+          "name": "testSetChForValidChannel\/4",
+          "value_param": "\"99\"",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "name": "InvalidChannels\/TunerInvalidChannelTest",
+      "tests": 5,
+      "testsuite": [
+        {
+          "name": "testSetChForInvalidChannel\/0",
+          "value_param": "\"-12\"",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 49
+        },
+        {
+          "name": "testSetChForInvalidChannel\/1",
+          "value_param": "\"-2\"",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 49
+        },
+        {
+          "name": "testSetChForInvalidChannel\/2",
+          "value_param": "\"-0\"",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 49
+        },
+        {
+          "name": "testSetChForInvalidChannel\/3",
+          "value_param": "\"100\"",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 49
+        },
+        {
+          "name": "testSetChForInvalidChannel\/4",
+          "value_param": "\"9999\"",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TunerTest.cpp",
+          "line": 49
+        }
+      ]
+    }
+  ]
+}

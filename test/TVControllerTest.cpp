@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "Tuner.h"
+#include "fakeTuner.h"
 #include "TVController.h"
 
 class MockTunerForController : public Tuner {

@@ -1,0 +1,67 @@
+{
+  "tests": 11,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "ControllerTest",
+      "tests": 11,
+      "testsuite": [
+        {
+          "name": "PressNumber1ThenConfirm",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 21
+        },
+        {
+          "name": "Press1Then2_AutoChange",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 28
+        },
+        {
+          "name": "Press1234_TwoStageChange",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 35
+        },
+        {
+          "name": "OtherButtonCancelsBuffer",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 42
+        },
+        {
+          "name": "Zero7_SingleDigit7",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 52
+        },
+        {
+          "name": "FavoriteAdd_NewChannel",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 58
+        },
+        {
+          "name": "FavoriteToggle_Remove",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 66
+        },
+        {
+          "name": "FavoriteToggleScenario",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 76
+        },
+        {
+          "name": "NextFavorite_Normal",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 94
+        },
+        {
+          "name": "NextFavorite_WrapAround",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 101
+        },
+        {
+          "name": "NextFavorite_EmptyList",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 108
+        }
+      ]
+    }
+  ]
+}

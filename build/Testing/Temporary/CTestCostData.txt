@@ -1,0 +1,26 @@
+ControllerTest.OtherButtonCancelsBuffer 5 0.0327054
+ControllerTest.Press1234_TwoStageChange 4 0.0636159
+ControllerTest.Press1Then2_AutoChange 4 0.0364844
+ControllerTest.PressNumber1ThenConfirm 4 0.0405341
+ControllerTest.Zero7_SingleDigit7 4 0.0374192
+InvalidChannels/TunerInvalidChannelTest.testSetChForInvalidChannel/"-0" 5 0.0438006
+InvalidChannels/TunerInvalidChannelTest.testSetChForInvalidChannel/"-12" 5 0.0471189
+InvalidChannels/TunerInvalidChannelTest.testSetChForInvalidChannel/"-2" 5 0.0369882
+InvalidChannels/TunerInvalidChannelTest.testSetChForInvalidChannel/"100" 5 0.0327452
+InvalidChannels/TunerInvalidChannelTest.testSetChForInvalidChannel/"9999" 5 0.0315061
+TunerTest.initChannel 5 0.0326382
+TunerTest.testSeekCh10times 5 0.0351657
+TunerTest.testSeekCh10timesAfterSetCH 5 0.0336377
+TVControllerTest.testFramework 5 0.0711494
+ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"0" 5 0.0351707
+ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"12" 5 0.037592
+ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"4" 5 0.0341815
+ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"5" 5 0.0353005
+ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99" 5 0.0799461
+ControllerTest.FavoriteAdd_NewChannel 3 0.0402676
+ControllerTest.FavoriteToggle_Remove 4 0.0367643
+ControllerTest.FavoriteToggleScenario 3 0.0391018
+ControllerTest.NextFavorite_EmptyList 2 0.0418846
+ControllerTest.NextFavorite_Normal 2 0.038179
+ControllerTest.NextFavorite_WrapAround 2 0.0365558
+---
