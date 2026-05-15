@@ -25,20 +25,20 @@
 	ProcessorClockFrequency="3401.000000"
 	>
 	<Testing>
-		<StartDateTime>May 15 16:27 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</StartDateTime>
-		<StartTestTime>1778830065</StartTestTime>
+		<StartDateTime>May 15 16:45 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</StartDateTime>
+		<StartTestTime>1778831143</StartTestTime>
 		<TestList>
-			<Test>./ControllerTest.Zero7_SingleDigit7</Test>
+			<Test>./ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"</Test>
 		</TestList>
 		<Test Status="passed">
-			<Name>ControllerTest.Zero7_SingleDigit7</Name>
+			<Name>ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"</Name>
 			<Path>.</Path>
-			<FullName>./ControllerTest.Zero7_SingleDigit7</FullName>
-			<FullCommandLine>E:\dev\TDD_TV_13\build\TVChannelControllerTest.exe "--gtest_filter=ControllerTest.Zero7_SingleDigit7" "--gtest_also_run_disabled_tests"</FullCommandLine>
-			<StartTestTime>1778830065.648087</StartTestTime>
+			<FullName>./ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99"</FullName>
+			<FullCommandLine>E:\dev\TDD_TV_13\build\TunerTest.exe "--gtest_filter=ValidChannels/TunerValidChannelTest.testSetChForValidChannel/4" "--gtest_also_run_disabled_tests"</FullCommandLine>
+			<StartTestTime>1778831143.543391</StartTestTime>
 			<Results>
 				<NamedMeasurement type="numeric/double" name="Execution Time">
-					<Value>0.041742</Value>
+					<Value>0.266551</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Processors">
 					<Value>1</Value>
@@ -47,18 +47,18 @@
 					<Value>Completed</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="text/string" name="Command Line">
-					<Value>E:\dev\TDD_TV_13\build\TVChannelControllerTest.exe "--gtest_filter=ControllerTest.Zero7_SingleDigit7" "--gtest_also_run_disabled_tests"</Value>
+					<Value>E:\dev\TDD_TV_13\build\TunerTest.exe "--gtest_filter=ValidChannels/TunerValidChannelTest.testSetChForValidChannel/4" "--gtest_also_run_disabled_tests"</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="text/string" name="Environment">
 					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
 				</NamedMeasurement>
 				<Measurement>
-					<Value encoding="base64" compression="gzip">eJyNkE9rwzAMxe/+FDo2h5iVHQqFHsZSehh0I8l2WBxCmqjB4FjFVrqvv/wppRkM8k6S9UN+enFnrbYNtKW2qwDOjlrYb1WNV5VGUZF+Fetndeq0qVVR48WrhqgxyOg59K56aNXYDlUxLJNVJY7EuIXDiEDaT+CsDaODHbySZUfGoBve5Tc62hRJ78RgpBvNG5Ht7sohvtlcA49rBpu32neaUYosvCuHg6FTaaY52qt2ZFu0PYscdpc/8OPOuS2RQfx5hFH5EssTCu9vS3BYPUHrg6VmJhyYuDSBWHYvY+nCmn7sPM3/UgRXWjn/pz/p4yVJ9tGQwMRK8QujIriX====</Value>
+					<Value encoding="base64" compression="gzip">eJylUcGKgzAQvecr5lgPWsoWFgo9LLXtYaG7qNuLEUl1agMxKUns/v4alWILCwXfaSbv8SZvJmqk5LKCmnE58+CsVQ3bFS3xRpMwzJNjvnijp4aLkuYlXg2tlKoEWjTWN7oYtbRrXZU7s6AoyEFZXMG+k0DSMnDmwqKGNRyZ4OXmwqREYeZJI1GPn5w4cF4x2s1lpx7I+ZKk6zsyiIYMC7DdDJdhqE3DLQYk9e/IYC/UiYmeR3njWskaZatF6zfXJ/HY84U/kxSinwN0yCaH7H3g63OyF8yW71Abb1K4wQSsskx45LWtWmTaL9WvfLzZf7cCzWTwNKjdw/dHHG9Dt9NeHJA/cJ7pvA==</Value>
 				</Measurement>
 			</Results>
 		</Test>
-		<EndDateTime>May 15 16:27 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</EndDateTime>
-		<EndTestTime>1778830065</EndTestTime>
+		<EndDateTime>May 15 16:45 [NON-UTF-8-BYTE-0xB4][NON-UTF-8-BYTE-0xEB][NON-UTF-8-BYTE-0xC7]ѹα[NON-UTF-8-BYTE-0xB9] ǥ[NON-UTF-8-BYTE-0xC1]ؽ[NON-UTF-8-BYTE-0xC3]</EndDateTime>
+		<EndTestTime>1778831143</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

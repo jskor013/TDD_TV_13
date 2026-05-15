@@ -15,11 +15,13 @@
 #include "remoteKey.h"
 #include <string>
 #include <iostream>
+#include <set>
 
 class TVController {
 private:
     Tuner* tuner;
     std::string processingCH;
+    std::set<int> FavoriteList;
 
     void setTunerCh() {
         // 로그는 테스트의 결과가 절대 아닙니다. 로그가 있는 것을 테스트로 간주하지 마시기 바랍니다.
@@ -58,6 +60,15 @@ public:
                 break;
         }
     }
+    void addFavorite(int ch)
+    {
+        FavoriteList.insert(ch);
+    }
+    std::set<int> getFavoriteChannels()
+    {
+        return FavoriteList;
+    }
+
 };
 
 #endif // TV_CONTROLLER_H

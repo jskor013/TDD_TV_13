@@ -63,3 +63,4 @@ Test Dev To-Do List
 1. 버튼 추가 : 컴파일 오류 해결
 2. TEST 추가 및 RED CASE 확인
 3. 추가된 TEST의 RED CASE 해결 -> GREEN 처리 (숫자버튼 1, 12, 1234, 07 해결)
+4. 선호 채널 리스트 관리 RED CASE 추가

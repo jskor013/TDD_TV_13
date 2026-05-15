@@ -54,3 +54,59 @@ TEST_F(ControllerTest, Zero7_SingleDigit7) {
     ctrl->pushButton(remoteKey::KEY_7);
     EXPECT_EQ("7", tuner->getCurrentCH());
 }
+
+TEST_F(ControllerTest, FavoriteAdd_NewChannel) {
+    tuner->setCH("12");
+    ctrl->pushButton(remoteKey::KEY_FAVORITE);
+    const auto& favs = ctrl->getFavoriteChannels();
+    EXPECT_NE(favs.end(),
+              std::find(favs.begin(), favs.end(), 12));
+}
+
+TEST_F(ControllerTest, FavoriteToggle_Remove) {
+    tuner->setCH("12");
+    ctrl->pushButton(remoteKey::KEY_FAVORITE);
+    ctrl->pushButton(remoteKey::KEY_FAVORITE);
+    const auto& favs = ctrl->getFavoriteChannels();
+    EXPECT_EQ(favs.end(),
+              std::find(favs.begin(), favs.end(), 12));
+}
+
+// S2-3: 토글 시나리오 전체
+TEST_F(ControllerTest, FavoriteToggleScenario) {
+    for (int ch : {12, 8, 37, 8, 6}) {
+        tuner->setCH(std::to_string(ch));
+        ctrl->pushButton(remoteKey::KEY_FAVORITE);
+    }
+
+    const auto& favs = ctrl->getFavoriteChannels();
+    // {6, 12, 37} 만 남아야 함
+    EXPECT_EQ(3u, favs.size());
+    EXPECT_NE(favs.end(),
+              std::find(favs.begin(), favs.end(), 6));
+    EXPECT_NE(favs.end(),
+              std::find(favs.begin(), favs.end(), 12));
+    EXPECT_NE(favs.end(),
+              std::find(favs.begin(), favs.end(), 37));
+}
+
+// —— 기능 3: 다음 선호 채널 —————————————————————————————
+TEST_F(ControllerTest, NextFavorite_Normal) {
+    for (int ch : {1, 4, 12, 56}) ctrl->addFavorite(ch);
+    tuner->setCH("6");
+    ctrl->pushButton(remoteKey::KEY_NEXT_FAVORITE);
+    EXPECT_EQ("12", tuner->getCurrentCH());
+}
+
+TEST_F(ControllerTest, NextFavorite_WrapAround) {
+    ctrl->addFavorite(1); ctrl->addFavorite(56);
+    tuner->setCH("56");
+    ctrl->pushButton(remoteKey::KEY_NEXT_FAVORITE);
+    EXPECT_EQ("1", tuner->getCurrentCH());
+}
+
+TEST_F(ControllerTest, NextFavorite_EmptyList) {
+    tuner->setCH("6");
+    ctrl->pushButton(remoteKey::KEY_NEXT_FAVORITE);
+    EXPECT_EQ("6", tuner->getCurrentCH()); // 변화 없음
+}
