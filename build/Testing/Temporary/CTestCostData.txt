@@ -1,0 +1,20 @@
+ControllerTest.OtherButtonCancelsBuffer 1 0.0287368
+ControllerTest.Press1234_TwoStageChange 0 0
+ControllerTest.Press1Then2_AutoChange 0 0
+ControllerTest.PressNumber1ThenConfirm 0 0
+ControllerTest.Zero7_SingleDigit7 0 0
+InvalidChannels/TunerInvalidChannelTest.testSetChForInvalidChannel/"-0" 1 0.040473
+InvalidChannels/TunerInvalidChannelTest.testSetChForInvalidChannel/"-12" 1 0.0306496
+InvalidChannels/TunerInvalidChannelTest.testSetChForInvalidChannel/"-2" 1 0.0420324
+InvalidChannels/TunerInvalidChannelTest.testSetChForInvalidChannel/"100" 1 0.0327241
+InvalidChannels/TunerInvalidChannelTest.testSetChForInvalidChannel/"9999" 1 0.0283034
+TunerTest.initChannel 1 0.0324619
+TunerTest.testSeekCh10times 1 0.0295502
+TunerTest.testSeekCh10timesAfterSetCH 1 0.0307418
+TVControllerTest.testFramework 1 0.0331998
+ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"0" 1 0.0381476
+ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"12" 1 0.0366157
+ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"4" 1 0.0350841
+ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"5" 1 0.0345636
+ValidChannels/TunerValidChannelTest.testSetChForValidChannel/"99" 1 0.0341859
+---

@@ -1,0 +1,37 @@
+{
+  "tests": 5,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "ControllerTest",
+      "tests": 5,
+      "testsuite": [
+        {
+          "name": "PressNumber1ThenConfirm",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 21
+        },
+        {
+          "name": "Press1Then2_AutoChange",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 28
+        },
+        {
+          "name": "Press1234_TwoStageChange",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 35
+        },
+        {
+          "name": "OtherButtonCancelsBuffer",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 42
+        },
+        {
+          "name": "Zero7_SingleDigit7",
+          "file": "E:\\dev\\TDD_TV_13\\test\\TVChannelControllerTest.cpp",
+          "line": 52
+        }
+      ]
+    }
+  ]
+}
