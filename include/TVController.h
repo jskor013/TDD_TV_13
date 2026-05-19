@@ -11,56 +11,23 @@
 #ifndef TV_CONTROLLER_H
 #define TV_CONTROLLER_H
 
+#include "ChannelNavigator.h"
 #include "Tuner.h"
 #include "remoteKey.h"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
-#include <optional>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
+#include <variant>
 #include <vector>
-
-namespace tv::channel {
-inline constexpr int kMin = 0;
-inline constexpr int kMax = 99;
-inline constexpr int kCount = 100;
-inline constexpr int kMaxDigitLen = 2;
-
-inline int step(int ch, int delta) {
-    const int n = ch + delta;
-    return ((n % kCount) + kCount) % kCount;
-}
-} // namespace tv::channel
 
 class TVController {
 private:
     using KeyHandler = void (TVController::*)();
-
-    enum class CyclicDirection { Forward, Backward };
-
-    static std::optional<int> cyclicNeighbor(int current,
-                                             const std::vector<int>& channels,
-                                             CyclicDirection dir) {
-        if (channels.empty()) {
-            return std::nullopt;
-        }
-        if (dir == CyclicDirection::Forward) {
-            for (int ch : channels) {
-                if (ch > current) {
-                    return ch;
-                }
-            }
-            return channels.front();
-        }
-        for (auto it = channels.rbegin(); it != channels.rend(); ++it) {
-            if (*it < current) {
-                return *it;
-            }
-        }
-        return channels.back();
-    }
+    using ChannelNavigatorVariant =
+        std::variant<tv::navigation::LinearChannelNavigator, tv::navigation::ListChannelNavigator>;
 
     Tuner* tuner;
     std::string processingCH;
@@ -107,44 +74,29 @@ private:
         commitBufferedDigits();
     }
 
-    void channelUpWithoutSearch() {
-        const int next = tv::channel::step(getCurrentChannelInt(), 1);
-        commitChannel(std::to_string(next));
-    }
-
-    void channelDownWithoutSearch() {
-        const int next = tv::channel::step(getCurrentChannelInt(), -1);
-        commitChannel(std::to_string(next));
-    }
-
-    void channelUpWithSearch() {
-        const int current = getCurrentChannelInt();
-        const auto next = cyclicNeighbor(current, searchedChannels, CyclicDirection::Forward);
-        commitChannel(std::to_string(*next));
-    }
-
-    void channelDownWithSearch() {
-        const int current = getCurrentChannelInt();
-        const auto prev = cyclicNeighbor(current, searchedChannels, CyclicDirection::Backward);
-        commitChannel(std::to_string(*prev));
+    ChannelNavigatorVariant channelNavigatorForUpDown() const {
+        if (searchedChannels.empty()) {
+            return tv::navigation::LinearChannelNavigator{};
+        }
+        return tv::navigation::ListChannelNavigator{searchedChannels};
     }
 
     void handleChannelUp() {
         clearBuffer();
-        if (searchedChannels.empty()) {
-            channelUpWithoutSearch();
-        } else {
-            channelUpWithSearch();
-        }
+        const int current = getCurrentChannelInt();
+        const int next = std::visit(
+            [&](const tv::navigation::IChannelNavigator& nav) { return nav.channelUp(current); },
+            channelNavigatorForUpDown());
+        commitChannel(std::to_string(next));
     }
 
     void handleChannelDown() {
         clearBuffer();
-        if (searchedChannels.empty()) {
-            channelDownWithoutSearch();
-        } else {
-            channelDownWithSearch();
-        }
+        const int current = getCurrentChannelInt();
+        const int prev = std::visit(
+            [&](const tv::navigation::IChannelNavigator& nav) { return nav.channelDown(current); },
+            channelNavigatorForUpDown());
+        commitChannel(std::to_string(prev));
     }
 
     void handleSearch() {
@@ -172,9 +124,9 @@ private:
         if (favoriteChannels.empty()) {
             return;
         }
+        const tv::navigation::ListChannelNavigator nav(favoriteChannels);
         const int current = getCurrentChannelInt();
-        const auto next = cyclicNeighbor(current, favoriteChannels, CyclicDirection::Forward);
-        commitChannel(std::to_string(*next));
+        commitChannel(std::to_string(nav.channelUp(current)));
     }
 
     static const std::unordered_map<remoteKey, KeyHandler>& keyHandlers() {
