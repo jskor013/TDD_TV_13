@@ -11,35 +11,51 @@
 #ifndef TV_CONTROLLER_H
 #define TV_CONTROLLER_H
 
+#include "ChannelNavigator.h"
+#include "ChannelNumber.h"
+#include "ChannelObserver.h"
+#include "DigitInputBuffer.h"
+#include "FavoriteStore.h"
+#include "SearchSession.h"
 #include "Tuner.h"
 #include "remoteKey.h"
-#include <string>
-#include <iostream>
+#include <unordered_map>
+#include <variant>
 
+// Facade: orchestrates digit input, favorites, search session, navigation, and channel commit.
 class TVController {
-private:
-    Tuner* tuner;
-    std::string processingCH;
-
-    void setTunerCh() {
-        // 로그는 테스트의 결과가 절대 아닙니다. 로그가 있는 것을 테스트로 간주하지 마시기 바랍니다.
-        std::cout << "현재 설정하는 채널 : " << processingCH << std::endl;
-        // tuner->setCH(processingCH);
-    }
-
 public:
-    explicit TVController(Tuner* tuner) : tuner(tuner), processingCH("") {}
+    explicit TVController(Tuner& tuner);
 
-    void pushButton(remoteKey key) {
-        switch (key) {
-            case remoteKey::KEY_1:
-                processingCH += to_string(key);
-                break;
-            case remoteKey::KEY_OK:
-                setTunerCh();
-                break;
-        }
-    }
+    void pushButton(remoteKey key);
+
+private:
+    using KeyHandler = void (TVController::*)();
+    using ChannelNavigatorVariant =
+        std::variant<tv::navigation::LinearChannelNavigator, tv::navigation::ListChannelNavigator>;
+
+    Tuner& tuner_;
+    tv::observer::CoutChannelObserver defaultObserver_;
+    tv::observer::IChannelObserver* channelObserver_;
+    tv::input::DigitInputBuffer digitBuffer_;
+    tv::favorite::FavoriteStore favorites_;
+    tv::search::SearchSession search_;
+
+    tv::channel::ChannelNumber currentChannel() const;
+    void commitChannel(tv::channel::ChannelNumber ch);
+    void commitBufferedDigits();
+
+    void handleDigit(remoteKey key);
+    void handleOk();
+    ChannelNavigatorVariant channelNavigatorForUpDown() const;
+    void handleChannelUp();
+    void handleChannelDown();
+    void handleSearch();
+    void toggleFavorite();
+    void handleFavNext();
+
+    static const std::unordered_map<remoteKey, KeyHandler>& keyHandlers();
+    void handleUnsupportedKey(remoteKey key) const;
 };
 
 #endif // TV_CONTROLLER_H
