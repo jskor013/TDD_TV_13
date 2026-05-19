@@ -15,12 +15,49 @@
 #include "remoteKey.h"
 #include <algorithm>
 #include <iostream>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <vector>
 
+namespace tv::channel {
+inline constexpr int kMin = 0;
+inline constexpr int kMax = 99;
+inline constexpr int kCount = 100;
+inline constexpr int kMaxDigitLen = 2;
+
+inline int step(int ch, int delta) {
+    const int n = ch + delta;
+    return ((n % kCount) + kCount) % kCount;
+}
+} // namespace tv::channel
+
 class TVController {
 private:
+    enum class CyclicDirection { Forward, Backward };
+
+    static std::optional<int> cyclicNeighbor(int current,
+                                             const std::vector<int>& channels,
+                                             CyclicDirection dir) {
+        if (channels.empty()) {
+            return std::nullopt;
+        }
+        if (dir == CyclicDirection::Forward) {
+            for (int ch : channels) {
+                if (ch > current) {
+                    return ch;
+                }
+            }
+            return channels.front();
+        }
+        for (auto it = channels.rbegin(); it != channels.rend(); ++it) {
+            if (*it < current) {
+                return *it;
+            }
+        }
+        return channels.back();
+    }
+
     Tuner* tuner;
     std::string processingCH;
     std::vector<int> favoriteChannels;
@@ -36,7 +73,7 @@ private:
 
     void commitChannel(const std::string& ch) {
         int val = std::stoi(ch);
-        if (val < 0 || val > 99) {
+        if (val < tv::channel::kMin || val > tv::channel::kMax) {
             throw std::invalid_argument("Invalid channel");
         }
         std::string normalized = std::to_string(val);
@@ -54,7 +91,7 @@ private:
 
     void handleDigit(remoteKey key) {
         processingCH += digitFromKey(key);
-        if (processingCH.size() >= 2) {
+        if (processingCH.size() >= tv::channel::kMaxDigitLen) {
             commitBufferedDigits();
         }
     }
@@ -71,43 +108,25 @@ private:
     }
 
     void channelUpWithoutSearch() {
-        int next = (getCurrentChannelInt() + 1) % 100;
+        const int next = tv::channel::step(getCurrentChannelInt(), 1);
         commitChannel(std::to_string(next));
     }
 
     void channelDownWithoutSearch() {
-        int next = (getCurrentChannelInt() + 99) % 100;
+        const int next = tv::channel::step(getCurrentChannelInt(), -1);
         commitChannel(std::to_string(next));
     }
 
     void channelUpWithSearch() {
-        int current = getCurrentChannelInt();
-        int next = -1;
-        for (int ch : searchedChannels) {
-            if (ch > current) {
-                next = ch;
-                break;
-            }
-        }
-        if (next < 0) {
-            next = searchedChannels.front();
-        }
-        commitChannel(std::to_string(next));
+        const int current = getCurrentChannelInt();
+        const auto next = cyclicNeighbor(current, searchedChannels, CyclicDirection::Forward);
+        commitChannel(std::to_string(*next));
     }
 
     void channelDownWithSearch() {
-        int current = getCurrentChannelInt();
-        int prev = -1;
-        for (auto it = searchedChannels.rbegin(); it != searchedChannels.rend(); ++it) {
-            if (*it < current) {
-                prev = *it;
-                break;
-            }
-        }
-        if (prev < 0) {
-            prev = searchedChannels.back();
-        }
-        commitChannel(std::to_string(prev));
+        const int current = getCurrentChannelInt();
+        const auto prev = cyclicNeighbor(current, searchedChannels, CyclicDirection::Backward);
+        commitChannel(std::to_string(*prev));
     }
 
     void handleChannelUp() {
@@ -131,11 +150,7 @@ private:
     void handleSearch() {
         clearBufferBeforeNonDigitAction();
         searchedChannels.clear();
-        while (true) {
-            std::string ch = tuner->seekCH();
-            if (ch.empty()) {
-                break;
-            }
+        for (std::string ch = tuner->seekCH(); !ch.empty(); ch = tuner->seekCH()) {
             searchedChannels.push_back(std::stoi(ch));
         }
     }
@@ -157,18 +172,9 @@ private:
         if (favoriteChannels.empty()) {
             return;
         }
-        int current = getCurrentChannelInt();
-        int next = -1;
-        for (int fav : favoriteChannels) {
-            if (fav > current) {
-                next = fav;
-                break;
-            }
-        }
-        if (next < 0) {
-            next = favoriteChannels.front();
-        }
-        commitChannel(std::to_string(next));
+        const int current = getCurrentChannelInt();
+        const auto next = cyclicNeighbor(current, favoriteChannels, CyclicDirection::Forward);
+        commitChannel(std::to_string(*next));
     }
 
 public:
