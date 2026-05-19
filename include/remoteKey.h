@@ -11,55 +11,83 @@
 #ifndef REMOTE_KEY_H
 #define REMOTE_KEY_H
 
+#include <array>
+#include <cassert>
+#include <cstddef>
+#include <stdexcept>
 #include <string>
+#include <string_view>
+
+#define REMOTE_KEY_LIST(X)                                                                       \
+    X(KEY_0, "0", true, '0')                                                                     \
+    X(KEY_1, "1", true, '1')                                                                     \
+    X(KEY_2, "2", true, '2')                                                                     \
+    X(KEY_3, "3", true, '3')                                                                     \
+    X(KEY_4, "4", true, '4')                                                                     \
+    X(KEY_5, "5", true, '5')                                                                     \
+    X(KEY_6, "6", true, '6')                                                                     \
+    X(KEY_7, "7", true, '7')                                                                     \
+    X(KEY_8, "8", true, '8')                                                                     \
+    X(KEY_9, "9", true, '9')                                                                     \
+    X(KEY_OK, "OK", false, '\0')                                                                 \
+    X(KEY_CH_UP, "CH_UP", false, '\0')                                                           \
+    X(KEY_CH_DOWN, "CH_DOWN", false, '\0')                                                       \
+    X(KEY_SEARCH, "SEARCH", false, '\0')                                                         \
+    X(KEY_FAV_ADD, "FAV_ADD", false, '\0')                                                       \
+    X(KEY_FAV_NEXT, "FAV_NEXT", false, '\0')
 
 enum class remoteKey {
-    KEY_0,
-    KEY_1,
-    KEY_2,
-    KEY_3,
-    KEY_4,
-    KEY_5,
-    KEY_6,
-    KEY_7,
-    KEY_8,
-    KEY_9,
-    KEY_OK,
-    KEY_CH_UP,
-    KEY_CH_DOWN,
-    KEY_SEARCH,
-    KEY_FAV_ADD,
-    KEY_FAV_NEXT
+#define X(name, label, isDigit, digitChar) name,
+    REMOTE_KEY_LIST(X)
+#undef X
+    KEY_COUNT
 };
 
-inline std::string to_string(remoteKey key) {
-    switch (key) {
-        case remoteKey::KEY_0: return "0";
-        case remoteKey::KEY_1: return "1";
-        case remoteKey::KEY_2: return "2";
-        case remoteKey::KEY_3: return "3";
-        case remoteKey::KEY_4: return "4";
-        case remoteKey::KEY_5: return "5";
-        case remoteKey::KEY_6: return "6";
-        case remoteKey::KEY_7: return "7";
-        case remoteKey::KEY_8: return "8";
-        case remoteKey::KEY_9: return "9";
-        case remoteKey::KEY_OK: return "OK";
-        case remoteKey::KEY_CH_UP: return "CH_UP";
-        case remoteKey::KEY_CH_DOWN: return "CH_DOWN";
-        case remoteKey::KEY_SEARCH: return "SEARCH";
-        case remoteKey::KEY_FAV_ADD: return "FAV_ADD";
-        case remoteKey::KEY_FAV_NEXT: return "FAV_NEXT";
-    }
-    return "";
+namespace remote_key_detail {
+
+struct RemoteKeyMeta {
+    std::string_view label;
+    bool isDigit;
+    char digitChar;
+};
+
+inline constexpr std::size_t kRemoteKeyCount = static_cast<std::size_t>(remoteKey::KEY_COUNT);
+
+inline constexpr std::array<RemoteKeyMeta, kRemoteKeyCount> kRemoteKeyTable = {{
+#define X(name, label, isDigit, digitChar) {label, isDigit, digitChar},
+    REMOTE_KEY_LIST(X)
+#undef X
+}};
+
+inline bool isValidKey(remoteKey key) {
+    const auto idx = static_cast<std::size_t>(key);
+    return idx < kRemoteKeyCount;
 }
 
-inline bool isDigitKey(remoteKey key) {
-    return key >= remoteKey::KEY_0 && key <= remoteKey::KEY_9;
+} // namespace remote_key_detail
+
+[[nodiscard]] inline std::string to_string(remoteKey key) {
+    if (!remote_key_detail::isValidKey(key)) {
+        throw std::out_of_range("unknown remoteKey");
+    }
+    return std::string(remote_key_detail::kRemoteKeyTable[static_cast<std::size_t>(key)].label);
+}
+
+[[nodiscard]] inline bool isDigitKey(remoteKey key) {
+    if (!remote_key_detail::isValidKey(key)) {
+        return false;
+    }
+    return remote_key_detail::kRemoteKeyTable[static_cast<std::size_t>(key)].isDigit;
 }
 
 inline char digitFromKey(remoteKey key) {
-    return static_cast<char>('0' + (static_cast<int>(key) - static_cast<int>(remoteKey::KEY_0)));
+    if (!remote_key_detail::isValidKey(key) ||
+        !remote_key_detail::kRemoteKeyTable[static_cast<std::size_t>(key)].isDigit) {
+        throw std::invalid_argument("not a digit key");
+    }
+    return remote_key_detail::kRemoteKeyTable[static_cast<std::size_t>(key)].digitChar;
 }
+
+#undef REMOTE_KEY_LIST
 
 #endif // REMOTE_KEY_H

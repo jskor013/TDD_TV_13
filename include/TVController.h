@@ -14,10 +14,12 @@
 #include "Tuner.h"
 #include "remoteKey.h"
 #include <algorithm>
+#include <cassert>
 #include <iostream>
 #include <optional>
 #include <stdexcept>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 namespace tv::channel {
@@ -34,6 +36,8 @@ inline int step(int ch, int delta) {
 
 class TVController {
 private:
+    using KeyHandler = void (TVController::*)();
+
     enum class CyclicDirection { Forward, Backward };
 
     static std::optional<int> cyclicNeighbor(int current,
@@ -103,10 +107,6 @@ private:
         commitBufferedDigits();
     }
 
-    void clearBufferBeforeNonDigitAction() {
-        clearBuffer();
-    }
-
     void channelUpWithoutSearch() {
         const int next = tv::channel::step(getCurrentChannelInt(), 1);
         commitChannel(std::to_string(next));
@@ -130,7 +130,7 @@ private:
     }
 
     void handleChannelUp() {
-        clearBufferBeforeNonDigitAction();
+        clearBuffer();
         if (searchedChannels.empty()) {
             channelUpWithoutSearch();
         } else {
@@ -139,7 +139,7 @@ private:
     }
 
     void handleChannelDown() {
-        clearBufferBeforeNonDigitAction();
+        clearBuffer();
         if (searchedChannels.empty()) {
             channelDownWithoutSearch();
         } else {
@@ -148,7 +148,7 @@ private:
     }
 
     void handleSearch() {
-        clearBufferBeforeNonDigitAction();
+        clearBuffer();
         searchedChannels.clear();
         for (std::string ch = tuner->seekCH(); !ch.empty(); ch = tuner->seekCH()) {
             searchedChannels.push_back(std::stoi(ch));
@@ -156,7 +156,7 @@ private:
     }
 
     void toggleFavorite() {
-        clearBufferBeforeNonDigitAction();
+        clearBuffer();
         int current = getCurrentChannelInt();
         auto it = std::find(favoriteChannels.begin(), favoriteChannels.end(), current);
         if (it != favoriteChannels.end()) {
@@ -168,13 +168,31 @@ private:
     }
 
     void handleFavNext() {
-        clearBufferBeforeNonDigitAction();
+        clearBuffer();
         if (favoriteChannels.empty()) {
             return;
         }
         const int current = getCurrentChannelInt();
         const auto next = cyclicNeighbor(current, favoriteChannels, CyclicDirection::Forward);
         commitChannel(std::to_string(*next));
+    }
+
+    static const std::unordered_map<remoteKey, KeyHandler>& keyHandlers() {
+        static const std::unordered_map<remoteKey, KeyHandler> handlers = {
+            {remoteKey::KEY_OK, &TVController::handleOk},
+            {remoteKey::KEY_CH_UP, &TVController::handleChannelUp},
+            {remoteKey::KEY_CH_DOWN, &TVController::handleChannelDown},
+            {remoteKey::KEY_SEARCH, &TVController::handleSearch},
+            {remoteKey::KEY_FAV_ADD, &TVController::toggleFavorite},
+            {remoteKey::KEY_FAV_NEXT, &TVController::handleFavNext},
+        };
+        return handlers;
+    }
+
+    // Policy (B3): unregistered keys are ignored (no-op). Debug builds trap invalid enumerators.
+    void handleUnsupportedKey(remoteKey key) const {
+        (void)key;
+        assert(remote_key_detail::isValidKey(key) && "unsupported remoteKey: no handler registered");
     }
 
 public:
@@ -186,28 +204,14 @@ public:
             return;
         }
 
-        switch (key) {
-            case remoteKey::KEY_OK:
-                handleOk();
-                break;
-            case remoteKey::KEY_CH_UP:
-                handleChannelUp();
-                break;
-            case remoteKey::KEY_CH_DOWN:
-                handleChannelDown();
-                break;
-            case remoteKey::KEY_SEARCH:
-                handleSearch();
-                break;
-            case remoteKey::KEY_FAV_ADD:
-                toggleFavorite();
-                break;
-            case remoteKey::KEY_FAV_NEXT:
-                handleFavNext();
-                break;
-            default:
-                break;
+        const auto& handlers = keyHandlers();
+        const auto it = handlers.find(key);
+        if (it != handlers.end()) {
+            (this->*(it->second))();
+            return;
         }
+
+        handleUnsupportedKey(key);
     }
 };
 
