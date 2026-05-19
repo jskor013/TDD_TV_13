@@ -12,34 +12,34 @@
 #define TV_CONTROLLER_H
 
 #include "ChannelNavigator.h"
+#include "ChannelObserver.h"
+#include "DigitInputBuffer.h"
+#include "FavoriteStore.h"
+#include "SearchSession.h"
 #include "Tuner.h"
 #include "remoteKey.h"
-#include <algorithm>
 #include <cassert>
-#include <iostream>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
 #include <variant>
-#include <vector>
 
+// Facade: orchestrates digit input, favorites, search session, navigation, and channel commit.
 class TVController {
 private:
     using KeyHandler = void (TVController::*)();
     using ChannelNavigatorVariant =
         std::variant<tv::navigation::LinearChannelNavigator, tv::navigation::ListChannelNavigator>;
 
-    Tuner* tuner;
-    std::string processingCH;
-    std::vector<int> favoriteChannels;
-    std::vector<int> searchedChannels;
+    Tuner* tuner_;
+    tv::observer::CoutChannelObserver defaultObserver_;
+    tv::observer::IChannelObserver* channelObserver_;
+    tv::input::DigitInputBuffer digitBuffer_;
+    tv::favorite::FavoriteStore favorites_;
+    tv::search::SearchSession search_;
 
     int getCurrentChannelInt() const {
-        return std::stoi(tuner->getCurrentCH());
-    }
-
-    void clearBuffer() {
-        processingCH.clear();
+        return std::stoi(tuner_->getCurrentCH());
     }
 
     void commitChannel(const std::string& ch) {
@@ -47,42 +47,42 @@ private:
         if (val < tv::channel::kMin || val > tv::channel::kMax) {
             throw std::invalid_argument("Invalid channel");
         }
-        std::string normalized = std::to_string(val);
-        std::cout << "현재 설정하는 채널 : " << normalized << std::endl;
-        tuner->setCH(normalized);
+        const std::string normalized = std::to_string(val);
+        channelObserver_->onChannelCommitted(normalized);
+        tuner_->setCH(normalized);
     }
 
     void commitBufferedDigits() {
-        if (processingCH.empty()) {
+        if (digitBuffer_.empty()) {
             return;
         }
-        commitChannel(processingCH);
-        clearBuffer();
+        commitChannel(digitBuffer_.digits());
+        digitBuffer_.clear();
     }
 
     void handleDigit(remoteKey key) {
-        processingCH += digitFromKey(key);
-        if (processingCH.size() >= tv::channel::kMaxDigitLen) {
+        digitBuffer_.appendDigit(digitFromKey(key));
+        if (digitBuffer_.readyToAutoCommit()) {
             commitBufferedDigits();
         }
     }
 
     void handleOk() {
-        if (processingCH.empty()) {
+        if (digitBuffer_.empty()) {
             return;
         }
         commitBufferedDigits();
     }
 
     ChannelNavigatorVariant channelNavigatorForUpDown() const {
-        if (searchedChannels.empty()) {
+        if (search_.empty()) {
             return tv::navigation::LinearChannelNavigator{};
         }
-        return tv::navigation::ListChannelNavigator{searchedChannels};
+        return tv::navigation::ListChannelNavigator{search_.channels()};
     }
 
     void handleChannelUp() {
-        clearBuffer();
+        digitBuffer_.clear();
         const int current = getCurrentChannelInt();
         const int next = std::visit(
             [&](const tv::navigation::IChannelNavigator& nav) { return nav.channelUp(current); },
@@ -91,7 +91,7 @@ private:
     }
 
     void handleChannelDown() {
-        clearBuffer();
+        digitBuffer_.clear();
         const int current = getCurrentChannelInt();
         const int prev = std::visit(
             [&](const tv::navigation::IChannelNavigator& nav) { return nav.channelDown(current); },
@@ -100,33 +100,22 @@ private:
     }
 
     void handleSearch() {
-        clearBuffer();
-        searchedChannels.clear();
-        for (std::string ch = tuner->seekCH(); !ch.empty(); ch = tuner->seekCH()) {
-            searchedChannels.push_back(std::stoi(ch));
-        }
+        digitBuffer_.clear();
+        search_.collect(*tuner_);
     }
 
     void toggleFavorite() {
-        clearBuffer();
-        int current = getCurrentChannelInt();
-        auto it = std::find(favoriteChannels.begin(), favoriteChannels.end(), current);
-        if (it != favoriteChannels.end()) {
-            favoriteChannels.erase(it);
-        } else {
-            favoriteChannels.push_back(current);
-            std::sort(favoriteChannels.begin(), favoriteChannels.end());
-        }
+        digitBuffer_.clear();
+        favorites_.toggle(getCurrentChannelInt());
     }
 
     void handleFavNext() {
-        clearBuffer();
-        if (favoriteChannels.empty()) {
+        digitBuffer_.clear();
+        const auto next = favorites_.nextAfter(getCurrentChannelInt());
+        if (!next) {
             return;
         }
-        const tv::navigation::ListChannelNavigator nav(favoriteChannels);
-        const int current = getCurrentChannelInt();
-        commitChannel(std::to_string(nav.channelUp(current)));
+        commitChannel(std::to_string(*next));
     }
 
     static const std::unordered_map<remoteKey, KeyHandler>& keyHandlers() {
@@ -148,7 +137,12 @@ private:
     }
 
 public:
-    explicit TVController(Tuner* tuner) : tuner(tuner), processingCH("") {}
+    explicit TVController(Tuner* tuner)
+        : tuner_(tuner)
+        , channelObserver_(&defaultObserver_)
+        , digitBuffer_()
+        , favorites_()
+        , search_() {}
 
     void pushButton(remoteKey key) {
         if (isDigitKey(key)) {
