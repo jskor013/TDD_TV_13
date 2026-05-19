@@ -12,7 +12,7 @@
 class TextTestFixture : public ::testing::Test {
 protected:
     FakeTunerForText tuner_;
-    TVController controller_{&tuner_};
+    TVController controller_{tuner_};
     std::ostringstream transcript_;
 
     void setCurrentChannel(const std::string& ch) { tuner_.setCH(ch); }

@@ -24,7 +24,7 @@ public:
 class TVControllerFixture : public ::testing::Test {
 protected:
     MockTunerForController mockTuner;
-    TVController controller{&mockTuner};
+    TVController controller{mockTuner};
     std::string currentChannel_{"0"};
 
     void SetUp() override {

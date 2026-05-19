@@ -14,6 +14,9 @@ FetchContent_MakeAvailable(googletest)
 
 include_directories(include)
 
+add_library(tv_controller STATIC src/TVController.cpp)
+target_include_directories(tv_controller PUBLIC include)
+
 enable_testing()
 
 option(UPDATE_GOLDEN_MASTER "Rewrite golden expected files from test output" OFF)
@@ -22,11 +25,11 @@ add_executable(TunerTest test/TunerTest.cpp)
 target_link_libraries(TunerTest GTest::gtest_main GTest::gmock)
 
 add_executable(TVControllerTest test/TVControllerTest.cpp)
-target_link_libraries(TVControllerTest GTest::gtest_main GTest::gmock)
+target_link_libraries(TVControllerTest tv_controller GTest::gtest_main GTest::gmock)
 
 add_executable(TextTestGoldenTest test/TextTestGoldenTest.cpp)
 target_include_directories(TextTestGoldenTest PRIVATE test)
-target_link_libraries(TextTestGoldenTest GTest::gtest_main)
+target_link_libraries(TextTestGoldenTest tv_controller GTest::gtest_main)
 target_compile_definitions(TextTestGoldenTest PRIVATE
     GOLDEN_EXPECTED_DIR="${CMAKE_SOURCE_DIR}/test/golden"
 )
